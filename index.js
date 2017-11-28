@@ -60,7 +60,7 @@ const optionsUpdateKit = function (kitID, data) {
 
 const optionsUpdateLastKit = {
         method: 'GET',
-        uri: `/all`,
+        uri: `${address_host}/all`,
         // uri: `${address_host}/all`,
         // body: data,
         headers: {
