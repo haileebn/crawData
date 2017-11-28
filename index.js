@@ -246,5 +246,5 @@ function toDigits(value, option) {
 }
 
 router.listen(port, () => {
-    console.log(`server: ${port}`);
+    console.log(`server: ${port}`, process.env.HOSTNAME);
 });
