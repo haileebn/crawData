@@ -10,7 +10,7 @@ const urlDataKit = "http://118.70.72.15:2223/data";
 
 const port = process.env.PORT || 3000;
 
-const address_host = `http://localhost:${port}`;
+const address_host = `https://crawdata.herokuapp.com/`;
 
 const optionsLastRecord = function (x) {
     return {
@@ -102,30 +102,30 @@ router.get('/', (req, res) => {
 router.get('/all', (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     let data;
-    rp(optionsAllKit)
-        .then( result => {
-            result.forEach((kit, index) => {
-                // console.log(kit.x);
-
-                setTimeout(() => {
-                    // generate kit
-                    rp(optionsGenerateKit)
-                        .then(kitId => {
-                        console.log(kitId);
-                        const kitID = JSON.parse(kitId);
-                        data = {
-                            "Name": `${kit.x}`,
-                            "Location": [ kit.lat, kit.lon ]
-                        };
-                        console.log(JSON.stringify(data));
-                        rp(optionsUpdateKit(kitID.KitID, data));
-                        if(index === result.length - 1)
+    // rp(optionsAllKit)
+    //     .then( result => {
+    //         result.forEach((kit, index) => {
+    //             // console.log(kit.x);
+    //
+    //             setTimeout(() => {
+    //                 // generate kit
+    //                 rp(optionsGenerateKit)
+    //                     .then(kitId => {
+    //                     console.log(kitId);
+    //                     const kitID = JSON.parse(kitId);
+    //                     data = {
+    //                         "Name": `${kit.x}`,
+    //                         "Location": [ kit.lat, kit.lon ]
+    //                     };
+    //                     console.log(JSON.stringify(data));
+    //                     rp(optionsUpdateKit(kitID.KitID, data));
+    //                     if(index === result.length - 1)
                             res.send("ok");
-                    });
-                //     // console.log(index);
-                }, 500*(index + 1));
-            });
-        });
+        //             });
+        //         //     // console.log(index);
+        //         }, 500*(index + 1));
+        //     });
+        // });
 
     // const data = [
     //     {
