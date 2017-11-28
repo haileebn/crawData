@@ -60,7 +60,8 @@ const optionsUpdateKit = function (kitID, data) {
 
 const optionsUpdateLastKit = {
         method: 'GET',
-        uri: `${address_host}/all`,
+        uri: `/all`,
+        // uri: `${address_host}/all`,
         // body: data,
         headers: {
             'content-type': 'application/json; charset=utf-8', // Is set automatically
