@@ -93,6 +93,12 @@ const optionsAddLastDataKit = function(data){
     };
 };
 
+router.get('/', (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.send("Hello!!!");
+});
+
+
 router.get('/all', (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     let data;
