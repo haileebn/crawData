@@ -212,7 +212,7 @@ function lastDataAllKit() {
                                             console.log("err" + err.error);
                                         });
                             }
-                            }, 1000*(1 + index));
+                            }, 2000*(1 + index));
                         });
                     });
             })
