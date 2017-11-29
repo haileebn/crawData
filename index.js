@@ -9,7 +9,7 @@ const updateKit = "http://118.70.72.15:2223/kit";
 const urlAllKit = `https://api.waqi.info/mapq/bounds/?bounds=${bounds}`;
 const urlDataKit = "http://118.70.72.15:2223/data";
 
-const port = process.env.PORT || 2222;
+const port = process.env.PORT || 8080;
 
 const address_host = `http://localhost:${port}`;
 
@@ -185,7 +185,7 @@ function lastDataAllKit() {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
                                             console.log(kitmap.x, lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
-                                            data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000;
+                                            data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000 + 50000;
                                             lastdata.body.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
                                                 data["KitID"] = kit.KitID;
                                                 if(iaqi.p === "pm1") data["PM1"] = iaqi.v[0];
