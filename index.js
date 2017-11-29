@@ -11,7 +11,7 @@ const urlDataKit = "http://118.70.72.15:2223/data";
 
 const port = process.env.PORT || 8080;
 
-const address_host = `http://localhost:${port}`;
+const address_host = process.env.HOSTNAME || `http://localhost:${port}`;
 
 const optionsLastRecord = function (x) {
     return {
@@ -178,10 +178,11 @@ function lastDataAllKit() {
                 rp(optionsAllKit)
                     .then((kitMap) => {
                         kitMap.forEach((kitmap, index) => {
+                            setTimeout(() => {
                             if(kit.Name === kitmap.x){
 
                                 // console.log(kit.Name, kit.KitID, "***" + kitmap.x);
-                                // setTimeout(() => {
+
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
                                             // console.log(kitmap.x, lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
@@ -195,7 +196,7 @@ function lastDataAllKit() {
                                                 if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
 
                                                 if(index === lastdata.body.rxs.obs[0].msg.model.iaqi.length - 1){
-                                                    // console.log("Add Success", JSON.stringify(data), "\n");
+                                                    console.log("Add Success", JSON.stringify(data), "\n");
                                                     // console.log(typeof data);
 
                                                     rp(optionsAddLastDataKit(data))
@@ -208,11 +209,10 @@ function lastDataAllKit() {
                                             // console.log("+++++++++++");
                                         })
                                         .catch((err) => {
-                                            console.log(err.error);
+                                            console.log("err" + err.error);
                                         });
-                                // }, 1000*(1 + index));
-
                             }
+                            }, 1000*(1 + index));
                         });
                     });
             })
@@ -221,7 +221,7 @@ function lastDataAllKit() {
     setTimeout(() => {
         console.log("\nend 5minute");
         lastDataAllKit()
-    }, 2*60*1000);
+    }, 60*1000);
 }
 
 //
@@ -250,5 +250,5 @@ function toDigits(value, option) {
 }
 
 router.listen(port, () => {
-    console.log(`server: ${port}`);
+    console.log(`server: ${address_host}${port}`);
 });
