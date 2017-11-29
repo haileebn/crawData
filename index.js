@@ -206,7 +206,7 @@ function lastDataAllKit() {
                                             // console.log("+++++++++++");
                                         })
                                         .catch((err) => {
-                                            console.log(err);
+                                            console.log(err.error);
                                         });
                                 // }, 1000*(1 + index));
 
