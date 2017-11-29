@@ -20,6 +20,7 @@ const optionsLastRecord = function (x) {
             'content-type': 'application/json; charset=utf-8', // Is set automatically
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
         },
+        resolveWithFullResponse: true,
         json: true // Automatically parses the JSON string in the response
     }
 };
@@ -182,7 +183,7 @@ function lastDataAllKit() {
                                 // setTimeout(() => {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
-                                            console.log(kitmap.x);
+                                            console.log(kitmap.x, lastdata.headers, lastdata.body, lastdata.data);
                                             data["Time"] = lastdata.rxs.obs[0].msg.model.timestamp*1000;
                                             lastdata.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
                                                 data["KitID"] = kit.KitID;
