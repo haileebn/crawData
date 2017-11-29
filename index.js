@@ -219,7 +219,7 @@ function lastDataAllKit() {
     setTimeout(() => {
         console.log("\nend 5minute");
         lastDataAllKit()
-    }, 5*60*1000);
+    }, 2*60*1000);
 }
 
 //
