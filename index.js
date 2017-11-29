@@ -3,21 +3,22 @@ const router = express();
 const rp = require('request-promise');
 
 const bounds= "-9.96885060854611,64.86328125,53.64463782485651,147.83203125";
+// const bounds= "21.891128553399447,108.57341766357422,22.024863869070725,108.73546600341797";
 const generateKit = "http://118.70.72.15:2223/kit/generate";
 const updateKit = "http://118.70.72.15:2223/kit";
 const urlAllKit = `https://api.waqi.info/mapq/bounds/?bounds=${bounds}`;
 const urlDataKit = "http://118.70.72.15:2223/data";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2222;
 
-const address_host = process.env.HOSTNAME || `https://crawdata.herokuapp.com`;
+const address_host = `http://localhost:${port}`;
 
 const optionsLastRecord = function (x) {
     return {
         method: 'GET',
         uri: `https://api.waqi.info/api/widget/@${x}/widget.v1.json`,
         headers: {
-            'content-type': 'application/json; charset=utf-8', // Is set automatically
+            'content-type': 'text/html', // Is set automatically
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
         },
         resolveWithFullResponse: true,
@@ -61,14 +62,14 @@ const optionsUpdateKit = function (kitID, data) {
 
 const optionsUpdateLastKit = {
         method: 'GET',
-        uri: `${address_host}/all`,
         // uri: `${address_host}/all`,
+        uri: `${address_host}/all`,
         // body: data,
         headers: {
             'content-type': 'application/json; charset=utf-8', // Is set automatically
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
         },
-        // json: true // Automatically parses the JSON string in the response
+        json: true // Automatically parses the JSON string in the response
     };
 
 const optionsGetAllKit = {
@@ -183,25 +184,25 @@ function lastDataAllKit() {
                                 // setTimeout(() => {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
-                                            console.log(kitmap.x, lastdata);
-                                            // data["Time"] = lastdata.rxs.obs[0].msg.model.timestamp*1000;
-                                            // lastdata.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
-                                            //     data["KitID"] = kit.KitID;
-                                            //     if(iaqi.p === "pm1") data["PM1"] = iaqi.v[0];
-                                            //     if(iaqi.p === "pm25") data["PM2.5"] = iaqi.v[0];
-                                            //     if(iaqi.p === "pm10") data["PM10"] = iaqi.v[0];
-                                            //     if(iaqi.p === "t") data["Temperature"] = iaqi.v[0];
-                                            //     if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
+                                            console.log(kitmap.x, lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
+                                            data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000;
+                                            lastdata.body.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
+                                                data["KitID"] = kit.KitID;
+                                                if(iaqi.p === "pm1") data["PM1"] = iaqi.v[0];
+                                                if(iaqi.p === "pm25") data["PM2.5"] = iaqi.v[0];
+                                                if(iaqi.p === "pm10") data["PM10"] = iaqi.v[0];
+                                                if(iaqi.p === "t") data["Temperature"] = iaqi.v[0];
+                                                if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
 
-                                            //     if(index === lastdata.rxs.obs[0].msg.model.iaqi.length - 1){
-                                            //         console.log("Add Success", JSON.stringify(data), "\n");
-                                            //         rp(optionsAddLastDataKit(data))
-                                            //             .then()
-                                            //             .catch((err) => {
-                                            //                 console.log("Add Fail");
-                                            //             });
-                                            //     }
-                                            // });
+                                                if(index === lastdata.body.rxs.obs[0].msg.model.iaqi.length - 1){
+                                                    console.log("Add Success", JSON.stringify(data), "\n");
+                                                    rp(optionsAddLastDataKit(data))
+                                                        .then()
+                                                        .catch((err) => {
+                                                            console.log("Add Fail");
+                                                        });
+                                                }
+                                            });
                                             // console.log("+++++++++++");
                                         })
                                         .catch((err) => {
