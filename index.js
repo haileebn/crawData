@@ -183,7 +183,7 @@ function lastDataAllKit() {
                                 // setTimeout(() => {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
-                                            console.log(kitmap.x, lastdata.headers, lastdata.body, lastdata.data);
+                                            console.log(kitmap.x, lastdata);
                                             // data["Time"] = lastdata.rxs.obs[0].msg.model.timestamp*1000;
                                             // lastdata.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
                                             //     data["KitID"] = kit.KitID;
