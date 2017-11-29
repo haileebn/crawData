@@ -89,7 +89,7 @@ const optionsAddLastDataKit = function(data){
             uri: urlDataKit,
         body: data,
         headers: {
-        'content-type': 'application/json; charset=utf-8', // Is set automatically
+            'content-type': 'application/json; charset=utf-8', // Is set automatically
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
     },
         json: true // Automatically parses the JSON string in the response
@@ -158,7 +158,7 @@ rp(optionsUpdateLastKit)
         else console.log("fail");
     });
 function lastDataAllKit() {
-
+    let count = 0;
     const data = {
         "PM2.5": 0,
         "Temperature": 0,
@@ -173,19 +173,22 @@ function lastDataAllKit() {
     // All kit FairNet
     rp(optionsGetAllKit)
         .then((AllKit) => {
-            AllKit.forEach((kit, index) => {
-
+            AllKit.forEach((kit) => {
+                // setTimeout(() => {
                 rp(optionsAllKit)
                     .then((kitMap) => {
                         kitMap.forEach((kitmap, index) => {
-                            setTimeout(() => {
+                            // console.log(index);
+                            // setTimeout(() => {
                             if(kit.Name === kitmap.x){
 
                                 // console.log(kit.Name, kit.KitID, "***" + kitmap.x);
 
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
-                                            // console.log(kitmap.x, lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
+                                            if(kit.KitID === 603 || kitmap.x === "1584")
+                                                console.log("kitID:", kit.KitID, "Name:", kitmap.x,
+                                                    new Date(lastdata.body.rxs.obs[0].msg.model.timestamp*1000));
                                             data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000;
                                             lastdata.body.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
                                                 data["KitID"] = kit.KitID;
@@ -197,8 +200,12 @@ function lastDataAllKit() {
 
                                                 if(index === lastdata.body.rxs.obs[0].msg.model.iaqi.length - 1){
                                                     // console.log("Add Success", JSON.stringify(data), "\n");
-                                                    // console.log(typeof data);
 
+                                                    count++;
+                                                    // if(count > 300)
+                                                    //     console.log("   " + count);
+                                                    // else 
+                                                    //     console.log(count);
                                                     rp(optionsAddLastDataKit(data))
                                                         .then()
                                                         .catch((err) => {
@@ -212,16 +219,18 @@ function lastDataAllKit() {
                                             // console.log("err" + err.error);
                                         });
                             }
-                            }, 2000*(1 + index));
+                            // }, 1000*(1 + index));
                         });
                     });
-            })
 
+                // }, 300*(1 + index));
+            })
         });
     setTimeout(() => {
         // console.log("\nend 5minute");
+        console.log(count);
         lastDataAllKit();
-    }, 2*60*1000);
+    }, 1*60*1000);
 }
 
 //
