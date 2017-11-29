@@ -11,7 +11,7 @@ const urlDataKit = "http://118.70.72.15:2223/data";
 
 const port = process.env.PORT || 8080;
 
-const address_host = process.env.HOSTNAME || `http://localhost:${port}`;
+const address_host = process.env.HOSTNAME || `https://crawdata.herokuapp.com/`;
 
 const optionsLastRecord = function (x) {
     return {
