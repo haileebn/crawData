@@ -168,7 +168,7 @@ function lastDataAllKit() {
         "KitID": "",
         "Time" : 0
     };
-    console.log("\nNEW DATA");
+    // console.log("\nNEW DATA");
 
     // All kit FairNet
     rp(optionsGetAllKit)
@@ -196,7 +196,7 @@ function lastDataAllKit() {
                                                 if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
 
                                                 if(index === lastdata.body.rxs.obs[0].msg.model.iaqi.length - 1){
-                                                    console.log("Add Success", JSON.stringify(data), "\n");
+                                                    // console.log("Add Success", JSON.stringify(data), "\n");
                                                     // console.log(typeof data);
 
                                                     rp(optionsAddLastDataKit(data))
@@ -209,7 +209,7 @@ function lastDataAllKit() {
                                             // console.log("+++++++++++");
                                         })
                                         .catch((err) => {
-                                            console.log("err" + err.error);
+                                            // console.log("err" + err.error);
                                         });
                             }
                             }, 2000*(1 + index));
@@ -219,7 +219,7 @@ function lastDataAllKit() {
 
         });
     setTimeout(() => {
-        console.log("\nend 5minute");
+        // console.log("\nend 5minute");
         lastDataAllKit();
     }, 2*60*1000);
 }
