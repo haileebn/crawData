@@ -184,24 +184,24 @@ function lastDataAllKit() {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
                                             console.log(kitmap.x, lastdata.headers, lastdata.body, lastdata.data);
-                                            data["Time"] = lastdata.rxs.obs[0].msg.model.timestamp*1000;
-                                            lastdata.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
-                                                data["KitID"] = kit.KitID;
-                                                if(iaqi.p === "pm1") data["PM1"] = iaqi.v[0];
-                                                if(iaqi.p === "pm25") data["PM2.5"] = iaqi.v[0];
-                                                if(iaqi.p === "pm10") data["PM10"] = iaqi.v[0];
-                                                if(iaqi.p === "t") data["Temperature"] = iaqi.v[0];
-                                                if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
+                                            // data["Time"] = lastdata.rxs.obs[0].msg.model.timestamp*1000;
+                                            // lastdata.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
+                                            //     data["KitID"] = kit.KitID;
+                                            //     if(iaqi.p === "pm1") data["PM1"] = iaqi.v[0];
+                                            //     if(iaqi.p === "pm25") data["PM2.5"] = iaqi.v[0];
+                                            //     if(iaqi.p === "pm10") data["PM10"] = iaqi.v[0];
+                                            //     if(iaqi.p === "t") data["Temperature"] = iaqi.v[0];
+                                            //     if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
 
-                                                if(index === lastdata.rxs.obs[0].msg.model.iaqi.length - 1){
-                                                    console.log("Add Success", JSON.stringify(data), "\n");
-                                                    rp(optionsAddLastDataKit(data))
-                                                        .then()
-                                                        .catch((err) => {
-                                                            console.log("Add Fail");
-                                                        });
-                                                }
-                                            });
+                                            //     if(index === lastdata.rxs.obs[0].msg.model.iaqi.length - 1){
+                                            //         console.log("Add Success", JSON.stringify(data), "\n");
+                                            //         rp(optionsAddLastDataKit(data))
+                                            //             .then()
+                                            //             .catch((err) => {
+                                            //                 console.log("Add Fail");
+                                            //             });
+                                            //     }
+                                            // });
                                             // console.log("+++++++++++");
                                         })
                                         .catch((err) => {
