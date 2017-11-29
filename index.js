@@ -9,9 +9,9 @@ const updateKit = "http://118.70.72.15:2223/kit";
 const urlAllKit = `https://api.waqi.info/mapq/bounds/?bounds=${bounds}`;
 const urlDataKit = "http://118.70.72.15:2223/data";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
-const address_host = process.env.HOSTNAME || `https://crawdata.herokuapp.com`;
+const address_host = `http://localhost:${port}`;
 
 const optionsLastRecord = function (x) {
     return {
@@ -250,5 +250,5 @@ function toDigits(value, option) {
 }
 
 router.listen(port, () => {
-    console.log(`server: ${address_host}${port}`);
+    console.log(`server: ${address_host}`);
 });
