@@ -184,8 +184,8 @@ function lastDataAllKit() {
                                 // setTimeout(() => {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
-                                            console.log(kitmap.x, lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
-                                            data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000 + 50000;
+                                            // console.log(kitmap.x, lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
+                                            data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000;
                                             lastdata.body.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
                                                 data["KitID"] = kit.KitID;
                                                 if(iaqi.p === "pm1") data["PM1"] = iaqi.v[0];
@@ -195,7 +195,9 @@ function lastDataAllKit() {
                                                 if(iaqi.p === "h") data["Humidity"] = iaqi.v[0];
 
                                                 if(index === lastdata.body.rxs.obs[0].msg.model.iaqi.length - 1){
-                                                    console.log("Add Success", JSON.stringify(data), "\n");
+                                                    // console.log("Add Success", JSON.stringify(data), "\n");
+                                                    // console.log(typeof data);
+
                                                     rp(optionsAddLastDataKit(data))
                                                         .then()
                                                         .catch((err) => {
