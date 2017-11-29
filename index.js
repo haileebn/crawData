@@ -187,8 +187,12 @@ function lastDataAllKit() {
                                     rp(optionsLastRecord(kitmap.x))
                                         .then( lastdata => {
                                             // console.log(typeof kitmap.x,typeof kit.KitID);
-                                            if(kit.KitID === 603 || kitmap.x === "1584")
-                                                console.log(`kitID: ${kit.KitID} Name: ${kitmap.x} UPDATE: ${new Date(lastdata.body.rxs.obs[0].msg.model.timestamp*1000).getHours()}:${new Date(lastdata.body.rxs.obs[0].msg.model.timestamp*1000).getMinutes()}`);
+                                            if(kit.KitID === 603 || kitmap.x === "1584"){
+                                                let TIME, strTime;
+                                                TIME = new Date(lastdata.body.rxs.obs[0].msg.model.timestamp*1000);
+                                                strTime = `${TIME.getDate()}-${TIME.getMonth() + 1}-${TIME.getFullYear()} ${TIME.getHours()}:${TIME.getMinutes()}`;
+                                                console.log(`kitID: ${kit.KitID} Name: ${kitmap.x} UPDATE:  ${strTime}`);
+                                            }
                                             data["Time"] = lastdata.body.rxs.obs[0].msg.model.timestamp*1000;
                                             lastdata.body.rxs.obs[0].msg.model.iaqi.forEach((iaqi, index) => {
                                                 data["KitID"] = kit.KitID;
