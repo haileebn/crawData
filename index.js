@@ -9,7 +9,7 @@ const updateKit = "http://118.70.72.15:2223/kit";
 const urlAllKit = `https://api.waqi.info/mapq/bounds/?bounds=${bounds}`;
 const urlDataKit = "http://118.70.72.15:2223/data";
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 const address_host = process.env.HOSTNAME || `https://crawdata.herokuapp.com`;
 
