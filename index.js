@@ -220,8 +220,8 @@ function lastDataAllKit() {
         });
     setTimeout(() => {
         console.log("\nend 5minute");
-        lastDataAllKit()
-    }, 60*1000);
+        lastDataAllKit();
+    }, 2*60*1000);
 }
 
 //
