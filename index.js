@@ -9,7 +9,7 @@ const updateKit = "http://118.70.72.15:2223/kit";
 const urlAllKit = `https://api.waqi.info/mapq/bounds/?bounds=${bounds}`;
 const urlDataKit = "http://118.70.72.15:2223/data";
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5858;
 
 const address_host = `http://localhost:${port}`;
 
@@ -234,7 +234,7 @@ function lastDataAllKit() {
         // console.log("\nend 5minute");
         console.log(count);
         lastDataAllKit();
-    }, 1*60*1000);
+    }, 5*60*1000);
 }
 
 //
