@@ -23,7 +23,7 @@ const optionsLastRecord = function (x) {
             'Host': 'api.waqi.info',
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
         },
-        // resolveWithFullResponse: true,
+        resolveWithFullResponse: true,
         json: true // Automatically parses the JSON string in the response
     }
 };
@@ -232,7 +232,7 @@ function lastDataAllKit() {
         // console.log("\nend 5minute");
         // console.log(count);
         lastDataAllKit();
-    }, 3*60*1000);
+    }, 60*1000);
 }
 
 //
