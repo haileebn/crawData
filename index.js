@@ -205,11 +205,7 @@ function lastDataAllKit() {
                                                 if(index === lastdata.body.rxs.obs[0].msg.model.iaqi.length - 1){
                                                     // console.log("Add Success", JSON.stringify(data), "\n");
 
-                                                    count++;
-                                                    // if(count > 300)
-                                                    //     console.log("   " + count);
-                                                    // else 
-                                                    //     console.log(count);
+                                                    // count++;
                                                     rp(optionsAddLastDataKit(data))
                                                         .then()
                                                         .catch((err) => {
@@ -232,9 +228,9 @@ function lastDataAllKit() {
         });
     setTimeout(() => {
         // console.log("\nend 5minute");
-        console.log(count);
+        // console.log(count);
         lastDataAllKit();
-    }, 1*60*1000);
+    }, 3*60*1000);
 }
 
 //
