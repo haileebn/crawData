@@ -11,7 +11,7 @@ const urlDataKit = "http://118.70.72.15:2223/data";
 
 const port = process.env.PORT || 2222;
 
-const address_host = `http://localhost:${port}`;
+const address_host = `http://118.70.72.15:${port}`;
 
 const optionsLastRecord = function (x) {
     return {
