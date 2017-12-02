@@ -11,7 +11,8 @@ const urlDataKit = "http://118.70.72.15:2223/data";
 
 const port = process.env.PORT || 2222;
 
-const address_host = `http://118.70.72.15:${port}`;
+const address_host = `http://localhost:${port}`;
+// const address_host = `http://118.70.72.15:${port}`;
 
 const optionsLastRecord = function (x) {
     return {
@@ -19,9 +20,10 @@ const optionsLastRecord = function (x) {
         uri: `https://api.waqi.info/api/widget/@${x}/widget.v1.json`,
         headers: {
             'content-type': 'text/html', // Is set automatically
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
+            'Host': 'api.waqi.info',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
         },
-        resolveWithFullResponse: true,
+        // resolveWithFullResponse: true,
         json: true // Automatically parses the JSON string in the response
     }
 };
